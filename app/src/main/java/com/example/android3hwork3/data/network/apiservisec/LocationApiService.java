@@ -1,0 +1,14 @@
+package com.example.android3hwork3.data.network.apiservisec;
+
+import com.example.android3hwork3.model.CharacterModel;
+import com.example.android3hwork3.model.LocationModel;
+import com.example.android3hwork3.model.RickyAndMortyResponse;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+
+public interface LocationApiService {
+
+    @GET("api/location")
+    Call<RickyAndMortyResponse<LocationModel>> fetchLocationModel();
+}
