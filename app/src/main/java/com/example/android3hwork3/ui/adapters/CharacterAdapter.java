@@ -2,6 +2,7 @@ package com.example.android3hwork3.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,8 @@ import com.example.android3hwork3.databinding.ItemCharacterBinding;
 import com.example.android3hwork3.model.CharacterModel;
 
 public class CharacterAdapter extends ListAdapter<CharacterModel, CharacterAdapter.ViewHolder> {
+
+    private onItemClick onItemClick;
 
     public CharacterAdapter(@NonNull DiffUtil.ItemCallback<CharacterModel> diffCallback) {
         super(diffCallback);
@@ -33,16 +36,28 @@ public class CharacterAdapter extends ListAdapter<CharacterModel, CharacterAdapt
         holder.onBind(getItem(position));
     }
 
+    public void setItemClick(onItemClick onItemClick) {
+        this.onItemClick = onItemClick;
+    }
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private  ItemCharacterBinding binding;
+        private ItemCharacterBinding binding;
 
         public ViewHolder(@NonNull ItemCharacterBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
-        public void onBind(CharacterModel model){
+
+        public void onBind(CharacterModel model) {
             Glide.with(binding.itemCharacterImage).load(model.getImage()).into(binding.itemCharacterImage);
             binding.itemCharacterName.setText(model.getName());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClick.itemClick(getAdapterPosition());
+                }
+            });
         }
     }
 
@@ -51,6 +66,7 @@ public class CharacterAdapter extends ListAdapter<CharacterModel, CharacterAdapt
         public boolean areItemsTheSame(@NonNull CharacterModel oldItem, @NonNull CharacterModel newItem) {
             return oldItem.getId() == newItem.getId();
         }
+
         @SuppressLint("DiffUtilEquals")
         @Override
         public boolean areContentsTheSame(@NonNull CharacterModel oldItem, @NonNull CharacterModel newItem) {

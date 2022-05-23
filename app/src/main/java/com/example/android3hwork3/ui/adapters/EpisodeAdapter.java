@@ -2,6 +2,7 @@ package com.example.android3hwork3.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,8 @@ import com.example.android3hwork3.databinding.ItemEpisodeBinding;
 import com.example.android3hwork3.model.EpisodeModel;
 
 public class EpisodeAdapter extends ListAdapter<EpisodeModel, EpisodeAdapter.ViewHolder> {
+
+    private onItemClick onItemClick;
 
     public EpisodeAdapter(@NonNull DiffUtil.ItemCallback<EpisodeModel> diffCallback) {
         super(diffCallback);
@@ -33,6 +36,10 @@ public class EpisodeAdapter extends ListAdapter<EpisodeModel, EpisodeAdapter.Vie
         holder.onBind(getItem(position));
     }
 
+    public void setItemClick(onItemClick onItemClick) {
+        this.onItemClick = onItemClick;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private  ItemEpisodeBinding binding;
 
@@ -45,6 +52,12 @@ public class EpisodeAdapter extends ListAdapter<EpisodeModel, EpisodeAdapter.Vie
             binding.itemEpisodeName.setText(model.getName());
             binding.itemEpisodeAirDate.setText(model.getAir_date());
             binding.itemEpisodeEpisode.setText(model.getEpisode());
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClick.itemClick(getAdapterPosition());
+                }
+            });
         }
     }
 

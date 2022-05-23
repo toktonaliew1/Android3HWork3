@@ -19,6 +19,10 @@ public abstract class BaseFragment<VB extends ViewBinding> extends Fragment {
         setupRequest();
         setupObserve();
         setupListener();
+        fetchCharacter();
+    }
+
+    protected  void fetchCharacter(){
     }
 
     protected  void setupViews(){

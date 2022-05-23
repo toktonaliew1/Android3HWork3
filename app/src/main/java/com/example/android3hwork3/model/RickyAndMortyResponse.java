@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class RickyAndMortyResponse<T> {
+
     public List<T> getResults() {
         return results;
     }
