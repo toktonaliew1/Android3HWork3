@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android3hwork3.base.BaseFragment;
 import com.example.android3hwork3.databinding.FragmentCharacterBinding;
 import com.example.android3hwork3.model.CharacterModel;
+import com.example.android3hwork3.model.EpisodeModel;
 import com.example.android3hwork3.model.LocationModel;
 import com.example.android3hwork3.model.RickyAndMortyResponse;
 import com.example.android3hwork3.ui.adapters.CharacterAdapter;
@@ -76,41 +77,25 @@ public class CharacterFragment extends BaseFragment<FragmentCharacterBinding> {
         });
     }
 
-    @Override
-    protected void setupListener () {
-        characterAdapter.setItemClick(new onItemClick() {
-            @Override
-            public void itemClick(int position) {
-                Navigation.findNavController(requireView()).navigate(
-                        CharacterFragmentDirections.actionCharacterFragmentToCharacterDetailFragment()
-                                .setPosition(position + 1)
-                );
-            }
-        });
-    }
+
 
     private void fetchCharacters() {
         if (hasConnection()) {
             viewModel.fetchCharacters().observe(getViewLifecycleOwner(), new Observer<RickyAndMortyResponse<CharacterModel>>() {
                 @Override
                 public void onChanged(RickyAndMortyResponse<CharacterModel> characterModelRickAndMortyResponse) {
-                    ArrayList<CharacterModel> list = new ArrayList<>(characterAdapter.getCurrentList());
-                    Toast.makeText(requireContext(), "Active networks OK " + totalCount, Toast.LENGTH_LONG).show();
-
-                    try {
+                    if (!loading) {
+                        ArrayList<CharacterModel> list = new ArrayList<>(characterAdapter.getCurrentList());
                         list.addAll(characterModelRickAndMortyResponse.getResults());
-                    } catch (Exception e) {
-                        if (loading) {
-                            Toast.makeText(requireContext(), "totalCount" + totalCount, Toast.LENGTH_SHORT).show();
-                            loading = false;
+                        characterAdapter.submitList(list);
+                        if (list != characterAdapter.getCurrentList()) {
+                            characterAdapter.submitList(list);
                         }
                     }
-                    characterAdapter.submitList(list);
                 }
             });
-        } else
+        }else
             characterAdapter.submitList((List<CharacterModel>) viewModel.getCharacters());
-         Toast.makeText(requireContext(), "No active networks... "+ totalCount, Toast.LENGTH_LONG).show();
     }
 
     public boolean hasConnection(){
@@ -121,6 +106,20 @@ public class CharacterFragment extends BaseFragment<FragmentCharacterBinding> {
         }
         return false;
     }
+
+
+   /* @Override
+    protect ed void setupListener () {
+        characterAdapter.setItemClick(new onItemClick() {
+            @Override
+            public void itemClick(int position) {
+                Navigation.findNavController(requireView()).navigate(
+                        CharacterFragmentDirections.actionCharacterFragmentToCharacterDetailFragment()
+                                .setPosition(position + 1)
+                );
+            }
+        });
+    }*/
 
     @Override
     protected void setupRequest() {
@@ -136,7 +135,16 @@ public class CharacterFragment extends BaseFragment<FragmentCharacterBinding> {
     @Override
     public void onResume() {
         super.onResume();
-        if (viewModel.characterPage != 1)
-            viewModel.characterPage--;
+        viewModel.fetchCharacters().observe(getViewLifecycleOwner(), new Observer<RickyAndMortyResponse<CharacterModel>>() {
+            @Override
+            public void onChanged(RickyAndMortyResponse<CharacterModel> characterModelRickyAndMortyResponse) {
+                if (loading){
+                    ArrayList<CharacterModel> list = new ArrayList<>(characterAdapter.getCurrentList());
+                    list.addAll(characterModelRickyAndMortyResponse.getResults());
+                    characterAdapter.submitList(list);
+                    loading = false;
+                }
+            }
+        });
     }
 }

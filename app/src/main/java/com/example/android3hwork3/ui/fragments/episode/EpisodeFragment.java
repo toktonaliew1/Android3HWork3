@@ -32,7 +32,6 @@ public class EpisodeFragment extends BaseFragment<FragmentEpisodeBinding> {
 
     private EpisodeViewModel viewModel;
     private EpisodeAdapter episodeAdapter = new EpisodeAdapter(EpisodeAdapter.diffCallBack);
-
     private LinearLayoutManager linearLayoutManager;
     private boolean loading = true;
     public int pastVisible, visibleCount, totalCount;
@@ -56,7 +55,6 @@ public class EpisodeFragment extends BaseFragment<FragmentEpisodeBinding> {
         linearLayoutManager = new LinearLayoutManager(requireContext());
         binding.episodeRecView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.episodeRecView.setAdapter(episodeAdapter);
-
         binding.episodeRecView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -65,7 +63,6 @@ public class EpisodeFragment extends BaseFragment<FragmentEpisodeBinding> {
                     visibleCount = linearLayoutManager.getChildCount();
                     totalCount = linearLayoutManager.getItemCount();
                     pastVisible = linearLayoutManager.findFirstVisibleItemPosition();
-
                     if (loading) {
                         if ((visibleCount + pastVisible) >= totalCount) {
                             loading = false;
@@ -78,7 +75,7 @@ public class EpisodeFragment extends BaseFragment<FragmentEpisodeBinding> {
             }
         });
 
-            episodeAdapter.setItemClick(new onItemClick() {
+            /*episodeAdapter.setItemClick(new onItemClick() {
                 @Override
                 public void itemClick(int position) {
                     Navigation.findNavController(requireView()).navigate(
@@ -86,11 +83,8 @@ public class EpisodeFragment extends BaseFragment<FragmentEpisodeBinding> {
                                     .setPosition(position + 1)
                     );
                 }
-            });
-
-
+            });*/
     }
-
 
     private void fetchEpisode() {
         if (isNetwork()) {
@@ -111,18 +105,14 @@ public class EpisodeFragment extends BaseFragment<FragmentEpisodeBinding> {
             });
         } else
             episodeAdapter.submitList((List<EpisodeModel>) viewModel.getEpisodes());
-
     }
-
 
     private boolean isNetwork() {
         ConnectivityManager connectivityManager =
-
                 (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnected();
     }
-
 
     @Override
     protected void setupRequest() {
@@ -130,8 +120,8 @@ public class EpisodeFragment extends BaseFragment<FragmentEpisodeBinding> {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         binding = null;
     }
 

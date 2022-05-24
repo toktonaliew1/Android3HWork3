@@ -33,7 +33,6 @@ public class LocationFragment extends BaseFragment<FragmentLocationBinding> {
     private FragmentLocationBinding binding;
     private LocationViewModel viewModel;
     private LocationAdapter locationAdapter = new LocationAdapter(LocationAdapter.diffCallBack);
-
     private LinearLayoutManager linearLayoutManager;
     private boolean loading = true;
     public int pastVisible, visibleCount, totalCount;
@@ -53,11 +52,9 @@ public class LocationFragment extends BaseFragment<FragmentLocationBinding> {
 
     @Override
     protected void setupListener() {
-
         linearLayoutManager = new LinearLayoutManager(requireContext());
         binding.locationRecView.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.locationRecView.setAdapter(locationAdapter);
-
         binding.locationRecView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -79,7 +76,7 @@ public class LocationFragment extends BaseFragment<FragmentLocationBinding> {
             }
         });
 
-        locationAdapter.setItemClick(new onItemClick() {
+        /*locationAdapter.setItemClick(new onItemClick() {
             @Override
             public void itemClick(int position) {
                 Navigation.findNavController(requireView()).navigate(
@@ -87,7 +84,7 @@ public class LocationFragment extends BaseFragment<FragmentLocationBinding> {
                                 .setPosition(position + 1)
                 );
             }
-        });
+        });*/
     }
 
 
@@ -110,18 +107,15 @@ public class LocationFragment extends BaseFragment<FragmentLocationBinding> {
             });
         } else
             locationAdapter.submitList((List<LocationModel>) viewModel.getLocations());
-
     }
 
     private boolean isNetwork() {
         ConnectivityManager connectivityManager =
-
                 (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnected();
     }
-
-
+ 
     @Override
     protected void setupRequest() {
         fetchLocation();
@@ -139,5 +133,4 @@ public class LocationFragment extends BaseFragment<FragmentLocationBinding> {
         if (viewModel.page != 1)
             viewModel.page--;
     }
-
 }
