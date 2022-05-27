@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         NavHostFragment navHostFragment =
                 (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_nav_host);
+        assert navHostFragment != null;
         navController = navHostFragment.getNavController();
 
         NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
@@ -45,5 +46,4 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
-
 }

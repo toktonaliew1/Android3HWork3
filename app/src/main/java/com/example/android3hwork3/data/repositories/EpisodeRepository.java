@@ -1,9 +1,9 @@
 package com.example.android3hwork3.data.repositories;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.android3hwork3.App;
-import com.example.android3hwork3.model.CharacterModel;
 import com.example.android3hwork3.model.EpisodeModel;
 import com.example.android3hwork3.model.RickyAndMortyResponse;
 
@@ -20,7 +20,7 @@ public class EpisodeRepository{
         MutableLiveData<RickyAndMortyResponse<EpisodeModel>> data = new MutableLiveData<>();
         App.episodeApiService.fetchEpisodeModel(page).enqueue(new Callback<RickyAndMortyResponse<EpisodeModel>>() {
             @Override
-            public void onResponse(Call<RickyAndMortyResponse<EpisodeModel>> call, Response<RickyAndMortyResponse<EpisodeModel>> response) {
+            public void onResponse(@NonNull Call<RickyAndMortyResponse<EpisodeModel>> call, @NonNull Response<RickyAndMortyResponse<EpisodeModel>> response) {
                 if (response.body() != null) {
                     App.episodeDao.insertAll(response.body().getResults());
                     data.setValue(response.body());
@@ -28,7 +28,7 @@ public class EpisodeRepository{
             }
 
             @Override
-            public void onFailure(Call<RickyAndMortyResponse<EpisodeModel>> call, Throwable t) {
+            public void onFailure(@NonNull Call<RickyAndMortyResponse<EpisodeModel>> call, @NonNull Throwable t) {
                 data.setValue(null);
             }
         });
@@ -45,18 +45,15 @@ public class EpisodeRepository{
         MutableLiveData<EpisodeModel> dataId = new MutableLiveData<>();
         App.episodeApiService.fetchEpisodeId(id).enqueue(new Callback<EpisodeModel>() {
             @Override
-            public void onResponse(Call<EpisodeModel> call, Response<EpisodeModel> response) {
+            public void onResponse(@NonNull Call<EpisodeModel> call, @NonNull Response<EpisodeModel> response) {
                 if (response.body() != null)
                     dataId.setValue(response.body());
-
             }
-
             @Override
-            public void onFailure(Call<EpisodeModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<EpisodeModel> call, @NonNull Throwable t) {
                 dataId.setValue(null);
 
             }
-
         });
         return dataId;
     }

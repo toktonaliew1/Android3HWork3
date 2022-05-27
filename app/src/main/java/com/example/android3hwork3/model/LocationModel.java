@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName;
 @Entity(tableName = "locationModel")
 public class LocationModel {
 
-
     @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
     public int id;

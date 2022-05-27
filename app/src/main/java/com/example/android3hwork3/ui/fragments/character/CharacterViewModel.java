@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 public class CharacterViewModel extends ViewModel {
 
-    private final  CharacterRepository characterRepository = new CharacterRepository();
+    private final CharacterRepository characterRepository = new CharacterRepository();
     public int characterPage = 1;
 
-    public MutableLiveData<RickyAndMortyResponse<CharacterModel>> fetchCharacters(){
+    public MutableLiveData<RickyAndMortyResponse<CharacterModel>> fetchCharacters() {
         return characterRepository.fetchCharacters(characterPage);
     }
 
-    public MutableLiveData<CharacterModel>  fetchCharacterId(int id) {
+    public MutableLiveData<CharacterModel> fetchCharacterId(int id) {
         return characterRepository.fetchCharacterId(id);
     }
 

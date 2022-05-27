@@ -2,9 +2,9 @@ package com.example.android3hwork3.di;
 
 
 import com.example.android3hwork3.data.network.RetrofitClient;
-import com.example.android3hwork3.data.network.apiservisec.CharacterApiService;
-import com.example.android3hwork3.data.network.apiservisec.EpisodeApiService;
-import com.example.android3hwork3.data.network.apiservisec.LocationApiService;
+import com.example.android3hwork3.data.network.apiservisec.CharacterApiServices;
+import com.example.android3hwork3.data.network.apiservisec.EpisodeApiServices;
+import com.example.android3hwork3.data.network.apiservisec.LocationApiServices;
 
 import javax.inject.Singleton;
 
@@ -17,28 +17,24 @@ import dagger.hilt.components.SingletonComponent;
 @InstallIn(SingletonComponent.class)
 public class NetWorkModule {
 
-
-     @Singleton
+    @Singleton
     RetrofitClient retrofitClient = new RetrofitClient();
-
-     @Singleton
-    @Provides
-    CharacterApiService provideCharacterApiService() {
-         return retrofitClient.provideCharacterApiService();
-     }
-
 
     @Singleton
     @Provides
-    EpisodeApiService provideEpisodeApiService() {
+    CharacterApiServices provideCharacterApiService() {
+        return retrofitClient.provideCharacterApiService();
+    }
+
+    @Singleton
+    @Provides
+    EpisodeApiServices provideEpisodeApiService() {
         return retrofitClient.providerEpisodeApiService();
     }
 
     @Singleton
     @Provides
-    LocationApiService provideLocationApiService() {
+    LocationApiServices provideLocationApiService() {
         return retrofitClient.provideLocationApiService();
     }
 }
-
-

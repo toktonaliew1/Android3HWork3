@@ -4,7 +4,6 @@ import android.content.Context;
 
 import androidx.room.Room;
 
-import com.example.android3hwork3.App;
 import com.example.android3hwork3.data.db.daos.CharacterDao;
 import com.example.android3hwork3.data.db.daos.EpisodeDao;
 import com.example.android3hwork3.data.db.daos.LocationDao;

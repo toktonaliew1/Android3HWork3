@@ -15,6 +15,4 @@ public class Info {
 
     @SerializedName("prev")
     private String prev;
-
 }
-

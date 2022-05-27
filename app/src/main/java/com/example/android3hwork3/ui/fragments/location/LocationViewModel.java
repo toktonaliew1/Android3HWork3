@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel;
 
 
 import com.example.android3hwork3.data.repositories.LocationRepository;
-import com.example.android3hwork3.model.EpisodeModel;
 import com.example.android3hwork3.model.LocationModel;
 import com.example.android3hwork3.model.RickyAndMortyResponse;
 
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 
 public class LocationViewModel extends ViewModel {
 
-    private LocationRepository locationRepository = new LocationRepository();
+    private final LocationRepository locationRepository = new LocationRepository();
     public  int page = 1;
 
     public MutableLiveData<RickyAndMortyResponse<LocationModel>> fetchLocation(){

@@ -7,17 +7,16 @@ import com.example.android3hwork3.data.db.RoomClient;
 import com.example.android3hwork3.data.db.daos.EpisodeDao;
 import com.example.android3hwork3.data.db.daos.LocationDao;
 import com.example.android3hwork3.data.network.RetrofitClient;
-import com.example.android3hwork3.data.network.apiservisec.CharacterApiService;
-import com.example.android3hwork3.data.network.apiservisec.EpisodeApiService;
-import com.example.android3hwork3.data.network.apiservisec.LocationApiService;
+import com.example.android3hwork3.data.network.apiservisec.CharacterApiServices;
+import com.example.android3hwork3.data.network.apiservisec.EpisodeApiServices;
+import com.example.android3hwork3.data.network.apiservisec.LocationApiServices;
 
 public class App extends Application {
 
-    public static CharacterApiService characterApiService;
-    public static LocationApiService locationApiServices;
-    public static EpisodeApiService episodeApiService;
+    public static CharacterApiServices characterApiService;
+    public static LocationApiServices locationApiServices;
+    public static EpisodeApiServices episodeApiService;
     public RetrofitClient retrofitClient;
-    private RoomClient roomClient;
     public static CharacterDao characterDao;
     public static EpisodeDao episodeDao;
     public static LocationDao locationDao;
@@ -29,10 +28,9 @@ public class App extends Application {
         characterApiService = retrofitClient.provideCharacterApiService();
         locationApiServices = retrofitClient.provideLocationApiService();
         episodeApiService = retrofitClient.providerEpisodeApiService();
-        roomClient = new RoomClient();
+        RoomClient roomClient = new RoomClient();
         characterDao = roomClient.provideCharacterDao(roomClient.provideRoom(this));
         locationDao = roomClient.provideLocationDao(roomClient.provideRoom(this));
         episodeDao = roomClient.provideEpisodeDao(roomClient.provideRoom(this));
-
     }
 }

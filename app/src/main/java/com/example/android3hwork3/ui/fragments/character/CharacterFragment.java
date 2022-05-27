@@ -28,7 +28,6 @@ import com.example.android3hwork3.ui.adapters.onItemClick;
 
 import java.util.ArrayList;
 
-
 public class CharacterFragment extends BaseFragment<FragmentCharacterBinding> {
 
     private CharacterViewModel viewModel;

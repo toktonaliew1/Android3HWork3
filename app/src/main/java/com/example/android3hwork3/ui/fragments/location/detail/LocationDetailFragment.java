@@ -15,7 +15,6 @@ import com.example.android3hwork3.model.LocationModel;
 import com.example.android3hwork3.ui.fragments.episode.detail.EpisodeDetailFragmentArgs;
 import com.example.android3hwork3.ui.fragments.location.LocationViewModel;
 
-
 public class LocationDetailFragment extends Fragment {
 
     private FragmentLocationDetailBinding binding;

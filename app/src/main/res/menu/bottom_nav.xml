@@ -2,12 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="character"
+        android:icon="@drawable/ic_person"
         android:id="@+id/characterFragment"/>
 
     <item android:title="location"
+        android:icon="@drawable/ic_location"
         android:id="@+id/locationFragment"/>
 
     <item android:title="episode"
+        android:icon="@drawable/ic_episode"
         android:id="@+id/episodeFragment"/>
 
 </menu>

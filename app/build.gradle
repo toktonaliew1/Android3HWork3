@@ -29,8 +29,6 @@ android {
     buildFeatures {
         viewBinding true
     }
-
-
 }
 
 dependencies {
@@ -44,15 +42,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
 
-
     // Retrofit 2
     def retrofitVersion = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
 
-
     //Gson
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-
 
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp-bom:5.0.0-alpha.6"
@@ -78,7 +73,4 @@ dependencies {
     // Hit
     implementation "com.google.dagger:hilt-android:2.41"
     annotationProcessor "com.google.dagger:hilt-compiler:2.41"
-
-
-
 }
