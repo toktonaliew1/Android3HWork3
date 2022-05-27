@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName;
 @Entity(tableName = "characterModel")
 public class CharacterModel {
 
-
     @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
     public int id;

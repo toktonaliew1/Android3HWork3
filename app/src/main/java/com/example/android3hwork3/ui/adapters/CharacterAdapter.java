@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.android3hwork3.databinding.ItemCharacterBinding;
 import com.example.android3hwork3.model.CharacterModel;
 
-public class CharacterAdapter extends ListAdapter<CharacterModel, CharacterAdapter.ViewHolder> {
+public class CharacterAdapter  extends ListAdapter<CharacterModel, CharacterAdapter.ViewHolder> {
 
     private onItemClick onItemClick;
 
@@ -40,9 +40,8 @@ public class CharacterAdapter extends ListAdapter<CharacterModel, CharacterAdapt
         this.onItemClick = onItemClick;
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemCharacterBinding binding;
+        private final ItemCharacterBinding binding;
 
         public ViewHolder(@NonNull ItemCharacterBinding binding) {
             super(binding.getRoot());
@@ -55,7 +54,7 @@ public class CharacterAdapter extends ListAdapter<CharacterModel, CharacterAdapt
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onItemClick.itemClick(getAdapterPosition());
+                    onItemClick.itemClick(model);
                 }
             });
         }

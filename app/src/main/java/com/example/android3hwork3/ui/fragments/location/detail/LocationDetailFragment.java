@@ -7,17 +7,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.android3hwork3.R;
-import com.example.android3hwork3.databinding.FragmentEpisodeDetailBinding;
 import com.example.android3hwork3.databinding.FragmentLocationDetailBinding;
-import com.example.android3hwork3.model.EpisodeModel;
 import com.example.android3hwork3.model.LocationModel;
-import com.example.android3hwork3.ui.fragments.episode.EpisodeViewModel;
 import com.example.android3hwork3.ui.fragments.episode.detail.EpisodeDetailFragmentArgs;
 import com.example.android3hwork3.ui.fragments.location.LocationViewModel;
 
@@ -28,7 +22,7 @@ public class LocationDetailFragment extends Fragment {
     private LocationViewModel viewModel;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentLocationDetailBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(LocationViewModel.class);
@@ -49,8 +43,8 @@ public class LocationDetailFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         binding  = null;
     }
 }

@@ -4,26 +4,19 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
-import com.example.android3hwork3.databinding.ItemCharacterBinding;
 import com.example.android3hwork3.databinding.ItemLocationBinding;
-import com.example.android3hwork3.model.CharacterModel;
 import com.example.android3hwork3.model.LocationModel;
 
 public class LocationAdapter extends ListAdapter<LocationModel, LocationAdapter.ViewHolder> {
-
-    private onItemClick onItemClick;
+    private onLocationClick onItemClick;
 
     public LocationAdapter(@NonNull DiffUtil.ItemCallback<LocationModel> diffCallback) {
         super(diffCallback);
     }
-
 
     @NonNull
     @Override
@@ -39,13 +32,12 @@ public class LocationAdapter extends ListAdapter<LocationModel, LocationAdapter.
         holder.onBind(getItem(position));
     }
 
-    public void setItemClick(onItemClick onItemClick) {
-        this.onItemClick = onItemClick;
+    public void setOnItemClick(onLocationClick onLocationClick) {
+        this.onItemClick = onLocationClick;
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemLocationBinding binding;
+        private final ItemLocationBinding binding;
 
         public ViewHolder(@NonNull ItemLocationBinding binding) {
             super(binding.getRoot());
@@ -58,7 +50,7 @@ public class LocationAdapter extends ListAdapter<LocationModel, LocationAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onItemClick.itemClick(getAdapterPosition());
+                    onItemClick.itemClick(model);
                 }
             });
         }

@@ -22,7 +22,7 @@ public class CharacterDetailFragment extends Fragment {
     private CharacterViewModel viewModel;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentCharacterDetailBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(CharacterViewModel.class);
@@ -43,8 +43,8 @@ public class CharacterDetailFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         binding  = null;
     }
 }

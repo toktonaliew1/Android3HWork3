@@ -11,24 +11,19 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.bumptech.glide.Glide;
-import com.example.android3hwork3.R;
-import com.example.android3hwork3.databinding.FragmentCharacterDetailBinding;
 import com.example.android3hwork3.databinding.FragmentEpisodeDetailBinding;
-import com.example.android3hwork3.model.CharacterModel;
+
 import com.example.android3hwork3.model.EpisodeModel;
-import com.example.android3hwork3.ui.fragments.character.CharacterViewModel;
-import com.example.android3hwork3.ui.fragments.character.detail.CharacterDetailFragmentArgs;
+
 import com.example.android3hwork3.ui.fragments.episode.EpisodeViewModel;
 
-
 public class EpisodeDetailFragment extends Fragment {
+
     private FragmentEpisodeDetailBinding binding;
     private EpisodeViewModel viewModel;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentEpisodeDetailBinding.inflate(inflater, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(EpisodeViewModel.class);
@@ -38,7 +33,7 @@ public class EpisodeDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        int  args = EpisodeDetailFragmentArgs.fromBundle(getArguments()).getPosition();
+        int args = EpisodeDetailFragmentArgs.fromBundle(getArguments()).getPosition();
         viewModel.fetchEpisodeId(args).observe(getViewLifecycleOwner(), new Observer<EpisodeModel>() {
             @Override
             public void onChanged(EpisodeModel episodeModel) {
@@ -50,12 +45,8 @@ public class EpisodeDetailFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding  = null;
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
-
-
-
-

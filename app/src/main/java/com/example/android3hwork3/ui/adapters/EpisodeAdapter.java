@@ -9,14 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-
-
 import com.example.android3hwork3.databinding.ItemEpisodeBinding;
+
 import com.example.android3hwork3.model.EpisodeModel;
 
 public class EpisodeAdapter extends ListAdapter<EpisodeModel, EpisodeAdapter.ViewHolder> {
 
-    private onItemClick onItemClick;
+    private onEpisodeClick onItemClick;
 
     public EpisodeAdapter(@NonNull DiffUtil.ItemCallback<EpisodeModel> diffCallback) {
         super(diffCallback);
@@ -32,30 +31,30 @@ public class EpisodeAdapter extends ListAdapter<EpisodeModel, EpisodeAdapter.Vie
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EpisodeAdapter.ViewHolder holder, int position) {
         holder.onBind(getItem(position));
     }
 
-    public void setItemClick(onItemClick onItemClick) {
+    public void setItemClick(onEpisodeClick onItemClick) {
         this.onItemClick = onItemClick;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private  ItemEpisodeBinding binding;
+        private final ItemEpisodeBinding binding;
 
         public ViewHolder(@NonNull ItemEpisodeBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        public void onBind(EpisodeModel model){
+        public void onBind(EpisodeModel model) {
             binding.itemEpisodeName.setText(model.getName());
             binding.itemEpisodeAirDate.setText(model.getAir_date());
             binding.itemEpisodeEpisode.setText(model.getEpisode());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onItemClick.itemClick(getAdapterPosition());
+                    onItemClick.itemClick(model);
                 }
             });
         }
@@ -66,6 +65,7 @@ public class EpisodeAdapter extends ListAdapter<EpisodeModel, EpisodeAdapter.Vie
         public boolean areItemsTheSame(@NonNull EpisodeModel oldItem, @NonNull EpisodeModel newItem) {
             return oldItem.getId() == newItem.getId();
         }
+
         @SuppressLint("DiffUtilEquals")
         @Override
         public boolean areContentsTheSame(@NonNull EpisodeModel oldItem, @NonNull EpisodeModel newItem) {
