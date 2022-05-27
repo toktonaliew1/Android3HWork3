@@ -4,6 +4,7 @@ import android.content.Context;
 
 import android.net.ConnectivityManager;
 
+import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 
@@ -24,7 +25,7 @@ import com.example.android3hwork3.databinding.FragmentCharacterBinding;
 import com.example.android3hwork3.model.CharacterModel;
 import com.example.android3hwork3.model.RickyAndMortyResponse;
 import com.example.android3hwork3.ui.adapters.CharacterAdapter;
-import com.example.android3hwork3.ui.adapters.onItemClick;
+import com.example.android3hwork3.ui.adapters.OnItemClick;
 
 import java.util.ArrayList;
 
@@ -72,7 +73,7 @@ public class CharacterFragment extends BaseFragment<FragmentCharacterBinding> {
             }
         });
 
-        characterAdapter.setItemClick(new onItemClick() {
+        characterAdapter.setItemClick(new OnItemClick() {
             @Override
             public void itemClick(CharacterModel model ) {
                 Navigation.findNavController((requireView())).navigate(
@@ -83,33 +84,29 @@ public class CharacterFragment extends BaseFragment<FragmentCharacterBinding> {
         });
     }
 
-
     private void fetchCharacters() {
-        if (hasConnection()) {
+        if (isNetwork()) {
             viewModel.fetchCharacters().observe(getViewLifecycleOwner(), new Observer<RickyAndMortyResponse<CharacterModel>>() {
                 @Override
                 public void onChanged(RickyAndMortyResponse<CharacterModel> characterModelRickAndMortyResponse) {
-                    if (!loading) {
-                        ArrayList<CharacterModel> list = new ArrayList<>(characterAdapter.getCurrentList());
+                    ArrayList<CharacterModel> list = new ArrayList<>(characterAdapter.getCurrentList());
                         list.addAll(characterModelRickAndMortyResponse.getResults());
                         characterAdapter.submitList(list);
                         if (list != characterAdapter.getCurrentList()) {
                             characterAdapter.submitList(list);
                         }
                     }
-                }
             });
         } else
             characterAdapter.submitList(viewModel.getCharacters());
+        characterAdapter.submitList(viewModel.getCharacters());
     }
 
-    public boolean hasConnection() {
-        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNW = cm.getActiveNetworkInfo();
-        if (activeNW != null && activeNW.isConnected()) {
-            return true;
-        }else
-        return false;
+    private boolean isNetwork() {
+       ConnectivityManager connectivityManager =
+               (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+       NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+       return networkInfo != null && networkInfo.isConnected();
     }
 
     @Override
@@ -121,16 +118,20 @@ public class CharacterFragment extends BaseFragment<FragmentCharacterBinding> {
     @Override
     public void onResume() {
         super.onResume();
-        viewModel.fetchCharacters().observe(getViewLifecycleOwner(), new Observer<RickyAndMortyResponse<CharacterModel>>() {
-            @Override
-            public void onChanged(RickyAndMortyResponse<CharacterModel> characterModelRickAndMortyResponse) {
-                if (loading) {
-                    ArrayList<CharacterModel> list = new ArrayList<>(characterAdapter.getCurrentList());
-                    list.addAll(characterModelRickAndMortyResponse.getResults());
-                    characterAdapter.submitList(list);
-                    loading = false;
+        if(isNetwork()){
+            viewModel.fetchCharacters().observe(getViewLifecycleOwner(), new Observer<RickyAndMortyResponse<CharacterModel>>() {
+                @Override
+                public void onChanged(RickyAndMortyResponse<CharacterModel> characterModelRickAndMortyResponse) {
+                    if (loading) {
+                        ArrayList<CharacterModel> list = new ArrayList<>(characterAdapter.getCurrentList());
+                        list.addAll(characterModelRickAndMortyResponse.getResults());
+                        characterAdapter.submitList(list);
+                        loading = false;
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            characterAdapter.submitList(viewModel.getCharacters());
+        }
     }
 }

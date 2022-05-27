@@ -19,7 +19,7 @@ import com.example.android3hwork3.databinding.FragmentLocationBinding;
 import com.example.android3hwork3.model.LocationModel;
 import com.example.android3hwork3.model.RickyAndMortyResponse;
 import com.example.android3hwork3.ui.adapters.LocationAdapter;
-import com.example.android3hwork3.ui.adapters.onLocationClick;
+import com.example.android3hwork3.ui.adapters.OnLocationClick;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,7 +66,7 @@ public class LocationFragment extends BaseFragment<FragmentLocationBinding> {
                 }
             }
         });
-        locationAdapter.setOnItemClick(new onLocationClick() {
+        locationAdapter.setOnItemClick(new OnLocationClick() {
             @Override
             public void itemClick(LocationModel model ) {
                 Navigation.findNavController((requireView())).navigate(

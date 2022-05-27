@@ -21,7 +21,7 @@ import com.example.android3hwork3.databinding.FragmentEpisodeBinding;
 import com.example.android3hwork3.model.EpisodeModel;
 import com.example.android3hwork3.model.RickyAndMortyResponse;
 import com.example.android3hwork3.ui.adapters.EpisodeAdapter;
-import com.example.android3hwork3.ui.adapters.onEpisodeClick;
+import com.example.android3hwork3.ui.adapters.OnEpisodeClick;
 import java.util.ArrayList;
 
 public class EpisodeFragment extends BaseFragment<FragmentEpisodeBinding> {
@@ -68,7 +68,7 @@ public class EpisodeFragment extends BaseFragment<FragmentEpisodeBinding> {
             }
         });
 
-        episodeAdapter.setItemClick(new onEpisodeClick() {
+        episodeAdapter.setItemClick(new OnEpisodeClick() {
             @Override
             public void itemClick(EpisodeModel model) {
                 Navigation.findNavController(requireView()).navigate(

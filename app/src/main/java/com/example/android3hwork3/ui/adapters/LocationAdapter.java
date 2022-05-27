@@ -12,7 +12,8 @@ import com.example.android3hwork3.databinding.ItemLocationBinding;
 import com.example.android3hwork3.model.LocationModel;
 
 public class LocationAdapter extends ListAdapter<LocationModel, LocationAdapter.ViewHolder> {
-    private onLocationClick onItemClick;
+
+    private OnLocationClick onItemClick;
 
     public LocationAdapter(@NonNull DiffUtil.ItemCallback<LocationModel> diffCallback) {
         super(diffCallback);
@@ -32,7 +33,7 @@ public class LocationAdapter extends ListAdapter<LocationModel, LocationAdapter.
         holder.onBind(getItem(position));
     }
 
-    public void setOnItemClick(onLocationClick onLocationClick) {
+    public void setOnItemClick(OnLocationClick onLocationClick) {
         this.onItemClick = onLocationClick;
     }
 

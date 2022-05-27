@@ -15,7 +15,7 @@ import com.example.android3hwork3.model.EpisodeModel;
 
 public class EpisodeAdapter extends ListAdapter<EpisodeModel, EpisodeAdapter.ViewHolder> {
 
-    private onEpisodeClick onItemClick;
+    private OnEpisodeClick onItemClick;
 
     public EpisodeAdapter(@NonNull DiffUtil.ItemCallback<EpisodeModel> diffCallback) {
         super(diffCallback);
@@ -35,7 +35,7 @@ public class EpisodeAdapter extends ListAdapter<EpisodeModel, EpisodeAdapter.Vie
         holder.onBind(getItem(position));
     }
 
-    public void setItemClick(onEpisodeClick onItemClick) {
+    public void setItemClick(OnEpisodeClick onItemClick) {
         this.onItemClick = onItemClick;
     }
 

@@ -16,7 +16,7 @@ import com.example.android3hwork3.model.CharacterModel;
 
 public class CharacterAdapter  extends ListAdapter<CharacterModel, CharacterAdapter.ViewHolder> {
 
-    private onItemClick onItemClick;
+    private OnItemClick onItemClick;
 
     public CharacterAdapter(@NonNull DiffUtil.ItemCallback<CharacterModel> diffCallback) {
         super(diffCallback);
@@ -36,7 +36,7 @@ public class CharacterAdapter  extends ListAdapter<CharacterModel, CharacterAdap
         holder.onBind(getItem(position));
     }
 
-    public void setItemClick(onItemClick onItemClick) {
+    public void setItemClick(OnItemClick onItemClick) {
         this.onItemClick = onItemClick;
     }
 
