@@ -2,9 +2,9 @@ package com.example.android3hwork3.di;
 
 
 import com.example.android3hwork3.data.network.RetrofitClient;
-import com.example.android3hwork3.data.network.apiservisec.CharacterApiServices;
-import com.example.android3hwork3.data.network.apiservisec.EpisodeApiServices;
-import com.example.android3hwork3.data.network.apiservisec.LocationApiServices;
+import com.example.android3hwork3.data.network.apiservices.CharacterApiServices;
+import com.example.android3hwork3.data.network.apiservices.EpisodeApiServices;
+import com.example.android3hwork3.data.network.apiservices.LocationApiServices;
 
 import javax.inject.Singleton;
 

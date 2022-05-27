@@ -1,8 +1,8 @@
 package com.example.android3hwork3.data.network;
 
-import com.example.android3hwork3.data.network.apiservisec.CharacterApiServices;
-import com.example.android3hwork3.data.network.apiservisec.EpisodeApiServices;
-import com.example.android3hwork3.data.network.apiservisec.LocationApiServices;
+import com.example.android3hwork3.data.network.apiservices.CharacterApiServices;
+import com.example.android3hwork3.data.network.apiservices.EpisodeApiServices;
+import com.example.android3hwork3.data.network.apiservices.LocationApiServices;
 
 import java.util.concurrent.TimeUnit;
 

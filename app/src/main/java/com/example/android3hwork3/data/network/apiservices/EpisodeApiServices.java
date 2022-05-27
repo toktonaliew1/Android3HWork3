@@ -1,4 +1,4 @@
-package com.example.android3hwork3.data.network.apiservisec;
+package com.example.android3hwork3.data.network.apiservices;
 import com.example.android3hwork3.model.EpisodeModel;
 import com.example.android3hwork3.model.RickyAndMortyResponse;
 

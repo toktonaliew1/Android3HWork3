@@ -11,7 +11,7 @@ import com.example.android3hwork3.model.EpisodeModel;
 import com.example.android3hwork3.model.LocationModel;
 
 @Database(entities = {CharacterModel.class, LocationModel.class, EpisodeModel.class }, version = 3)
-abstract   class AppDataBase extends RoomDatabase {
+abstract class AppDataBase extends RoomDatabase {
 
     public abstract CharacterDao characterDao();
 

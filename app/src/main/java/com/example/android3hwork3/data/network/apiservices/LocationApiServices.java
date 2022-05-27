@@ -1,4 +1,4 @@
-package com.example.android3hwork3.data.network.apiservisec;
+package com.example.android3hwork3.data.network.apiservices;
 
 import com.example.android3hwork3.model.LocationModel;
 import com.example.android3hwork3.model.RickyAndMortyResponse;
